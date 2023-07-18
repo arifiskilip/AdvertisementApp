@@ -1,0 +1,42 @@
+﻿@using Dtos.Concrete.AdvertisementAppUserDto;
+@model List<AdvertisementAppUserListDto>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_defaultLayout.cshtml";
+}
+<div class="container">
+    <div class="text-right">
+        <a style="color:red">Value 1 </a> || <a style="color:red">Value 1 </a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Başvurulan İlan</th>
+                <th>Başvuran Kişi</th>
+                <th>Başvuran Cinsiyeti</th>
+                <th>Başvuranın Durumu</th>
+                <th>Askerlik Durumu</th>
+                <th>Tecil Bitiş Tarihi</th>
+                <th>Deneyim</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.AdvertisementName</td>
+                    <td>@item.AppUserName</td>
+                    <td>@item.GenderName</td>
+                    <td>@item.AdvertisementAppUserStatusName</td>
+                    <td>@item.MilitaryStatusName</td>
+                    <td>@item.EndDate</td>
+                    <td>@item.WorkExperience</td>
+                    <td><a style="color:red" asp-action="PositiveApplication" asp-controller="Advertisement" asp-route-id="@item.Id">Olumlu </a> || <a style="color:red" asp-action="NegativeApplication" asp-controller="Advertisement" asp-route-id="@item.Id">Olumsuz </a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

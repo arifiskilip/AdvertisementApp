@@ -1,0 +1,32 @@
+﻿@using Dtos.Concrete.AppUserDto;
+@model AppUserSignInDto
+@{
+    ViewData["Title"] = "SingIn";
+    Layout = "~/Views/Shared/_defaultLayout.cshtml";
+}
+
+<div class="mt-4">
+    <form asp-action="SignIn" asp-controller="Account" method="post" class="p-4 w-75 mx-auto">
+        <div class="mb-3">
+            <label>Kullanıcı Adı :</label>
+            <input asp-for="@Model.UserName" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Şifre :</label>
+            <input type="password" asp-for="@Model.Password" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" asp-for="RememberMe" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Default checkbox
+                </label>
+            </div>
+        </div>
+        <div class="text text-danger" asp-validation-summary="All">
+        </div>
+        <div class="mb-3 text-end">
+            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,62 @@
+﻿@using Common.Enums;
+@using WebUI.Models;
+@model AdvertisementUserCreateModel
+@{
+    ViewData["Title"] = "Send";
+    Layout = "~/Views/Shared/_defaultLayout.cshtml";
+
+    var muaf = (int)MilitaryStatusType.Muaf;
+}
+
+<form class="w-75 mx-auto p-3" enctype="multipart/form-data" method="post" asp-action="Send" asp-controller="Advertisement">
+    <input type="hidden" asp-for="AppUserId" value="AppUserId" />
+    <input type="hidden" asp-for="AdvertisementId" value="AdvertisementId" />
+    @if (ViewBag.genderId == (int)GenderType.Erkek)
+    {
+        <div class="mb-3">
+            <label>Askerlik Durumu : </label>
+            <select asp-items="ViewBag.militaryStatus" onchange="setInputVisibility()" asp-for="MilitaryStatusId" class="form-select">
+            </select>
+        </div>
+    }
+    else
+    {
+        <input type="hidden" asp-for="MilitaryStatusId" value="@muaf" />
+    }
+    <div class="mb-3" style="display:block" id="militaryStatusEndDate">
+        <label for="EndDate">Tecil Tarihi : </label>
+        <input type="date" class="form-control" asp-for="EndDate" />
+    </div>   
+    <div class="mb-3">
+        <label for="WorkExperience">Deneyim Süresi: </label>
+        <input type="number" class="form-control" asp-for="WorkExperience" />
+    </div>
+    <div class="mb-3">
+        <label for="WorkExperience">Cv : </label>
+        <input type="file" class="form-control" asp-for="CvPath" />
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-outline-primary btn-block" type="submit">Başvur</button>
+    </div>
+     <div class="text text-danger" asp-validation-summary="All">
+         </div>
+</form>
+
+@section Scripts{
+    <script>
+        setInputVisibility()
+        function setInputVisibility(){
+            var selectElement = document.getElementById("MilitaryStatusId");
+            var militaryStatusId = selectElement.value;
+            var endDateElement = document.getElementById("militaryStatusEndDate");
+            if(militaryStatusId == 2){
+                endDateElement.style.display = "block";
+            }
+            else{
+                endDateElement.style.display = "none";
+            }
+        }
+
+    </script>
+}
+
